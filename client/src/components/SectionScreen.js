@@ -93,4 +93,3 @@ export const SectionScreen = ({ setFetchingSections }) => {
 		</section>
 	)
 }
-//  nameValue, deleteField, inputType, editLabel, editAction, editValue, submitEdit, (imageEdit = false)
