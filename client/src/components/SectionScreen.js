@@ -27,8 +27,11 @@ export const SectionScreen = ({ setFetchingSections }) => {
 					setValues(data.section)
 					dispatch({ type: types.addSection, payload: data.section })
 				})
-				.then(() => setFetching(false))
+				// .then(() => setFetching(false))
 				.catch((err) => new Error(err))
+		}
+		return () => {
+			setFetching(false)
 		}
 	}, [fetching, setValues, id])
 
@@ -56,7 +59,7 @@ export const SectionScreen = ({ setFetchingSections }) => {
 	}
 
 	const saveChanges = async () => {
-		await updateSection(idSection, thisSection)
+		await updateSection(thisSection, idSection)
 	}
 
 	return (
