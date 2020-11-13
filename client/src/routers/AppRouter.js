@@ -54,7 +54,6 @@ export const AppRouter = () => {
 										<h1>Añadir Sección a la web</h1>
 									</Modal.Header>
 									<Modal.Body>
-										<small>Si es una sección que no estaba planteada en el diseño, avisa a Yaiza para que aparezca, si no, solamente se guardarán los datos.</small>
 										<AddSection handleClose={handleClose} setFetchingSections={setFetchingSections} />
 									</Modal.Body>
 
@@ -74,7 +73,7 @@ export const AppRouter = () => {
 						<main className='container'>
 							<Switch>
 								<Route exact path='/' component={LoginScreen} />
-								<Route path='/signup' component={SignupScreen} />
+								<Route path='/registro' component={SignupScreen} />
 								<Redirect to='/' />
 							</Switch>
 						</main>

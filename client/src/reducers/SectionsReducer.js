@@ -1,4 +1,3 @@
-import React from 'react'
 import { types } from '../types/types'
 
 export const SectionsReducer = (state = [], action) => {

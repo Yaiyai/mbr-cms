@@ -1,0 +1,19 @@
+.login {
+	width: 30%;
+	margin: 0 auto;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	form {
+		input {
+			height: 25px;
+			margin-bottom: calc(#{$module} * 1.5);
+		}
+		.my-btn {
+			margin-top: calc(#{$module} / 2);
+		}
+		margin-bottom: calc(#{$module} * 1);
+	}
+}

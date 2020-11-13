@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'
 import { startSignup } from '../../actions/auth.action'
 import { AuthContext } from '../../auth/AuthContext'
 import useForm from '../../hooks/useForm'
+import { Link } from 'react-router-dom'
 import { types } from '../../types/types'
 
 export const SignupScreen = () => {
@@ -23,16 +24,20 @@ export const SignupScreen = () => {
 
 	return (
 		<>
-			<h1>signup</h1>
-			<form onSubmit={handleSignup}>
-				<input type='text' onChange={handleInputChange} placeholder='Tu nombre' name='name' />
-				<input type='email' onChange={handleInputChange} placeholder='Tu email' name='email' />
-				<input type='password' onChange={handleInputChange} placeholder='Contraseña' name='password' />
-				<input type='password' onChange={handleInputChange} placeholder='Repite Contraseña' name='password2' />
-				<button type='submit' className='my-btn'>
-					Registro
-				</button>
-			</form>
+			<section className='login'>
+				<form onSubmit={handleSignup}>
+					<input type='text' onChange={handleInputChange} placeholder='Tu nombre' name='name' />
+					<input type='email' onChange={handleInputChange} placeholder='Tu email' name='email' />
+					<input type='password' onChange={handleInputChange} placeholder='Contraseña' name='password' />
+					<input type='password' onChange={handleInputChange} placeholder='Repite Contraseña' name='password2' />
+					<button type='submit' className='my-btn mini'>
+						Registro
+					</button>
+				</form>
+				<small>
+					¿Ya estás registrado? Entra <Link to='/'>aquí</Link>{' '}
+				</small>
+			</section>
 		</>
 	)
 }

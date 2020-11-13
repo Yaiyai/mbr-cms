@@ -11,7 +11,7 @@ export const AddMaquina = ({ setShow, setmaquinaSelected, setFetchingMaquinaria 
 
 	const [maquinaToCreate, dispatch] = useReducer(MaquinasReducer)
 	const { values, setValues, handleInputChange, handleFileChange } = useForm()
-	const { features, name, gallery, image } = values
+	const { features, gallery, image } = values
 
 	const clearInput = () => {
 		const theinput = document.getElementById('to-reset-add')
@@ -105,6 +105,23 @@ export const AddMaquina = ({ setShow, setmaquinaSelected, setFetchingMaquinaria 
 						{maquinaToCreate?.name && <p className='preview'>{maquinaToCreate?.name}</p>}
 						<div className='button-input-group'>
 							<input type='text' onChange={handleInputChange} placeholder='Nombre de la máquina' name='name' />
+							<button type='submit' className='my-btn mini third'>
+								Añadir
+							</button>
+						</div>
+					</form>
+					<form onSubmit={handleSubmit}>
+						<label>Tipo de maquina* {maquinaToCreate?.category && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
+						{maquinaToCreate?.category && <p className='preview'>{maquinaToCreate?.category}</p>}
+						<div className='button-input-group'>
+							<select onChange={handleInputChange} name='category' required>
+								<option defaultValue>Seleccionar...</option>
+
+								<option value='Maquinaria CNC'>Maquinaria CNC</option>
+								<option value='Otra maquinaria'>Otra maquinaria</option>
+								<option value='Maquinaria Convencional'>Maquinaria Convencional</option>
+							</select>
+
 							<button type='submit' className='my-btn mini third'>
 								Añadir
 							</button>

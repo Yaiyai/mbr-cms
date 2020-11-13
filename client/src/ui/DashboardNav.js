@@ -53,6 +53,8 @@ export const DashboardNav = ({ handleShow, sections }) => {
 					<button className='my-btn secondary mini' onClick={handleLogout}>
 						Cerrar Sesión
 					</button>
+					<small>Made with &hearts; by Yai</small>
+					<small>&copy; Mecánica Brañosera S.L.</small>
 				</div>
 			</nav>
 		</>

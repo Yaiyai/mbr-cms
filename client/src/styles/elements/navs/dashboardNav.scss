@@ -39,6 +39,7 @@
 					color: white;
 					margin: 0 calc(#{$module} / 3) 0 0;
 					text-transform: uppercase;
+					cursor: pointer;
 
 					svg {
 						margin-left: calc(#{$module} / 6);
@@ -78,6 +79,10 @@
 		> * {
 			width: 100%;
 			margin-top: calc(#{$module} / 3);
+		}
+		small {
+			color: white;
+			text-align: center;
 		}
 	}
 }

@@ -29,10 +29,8 @@ export const MaquinasScreen = () => {
 			fetchSinToken('maquinaria')
 				.then((data) => data.json())
 				.then((data) => dispatchMaquinasData({ type: types.getMaquinas, payload: data.data }))
+				.then(() => setFetchingMaquinaria(false))
 				.catch((err) => new Error(err))
-		}
-		return () => {
-			setFetchingMaquinaria(false)
 		}
 	}, [fetchingMaquinaria, maquinaSelected])
 

@@ -24,3 +24,7 @@ img {
 	display: block;
 	width: 100%;
 }
+small {
+	font-weight: $weight-light;
+	@include font-line-height(10px);
+}

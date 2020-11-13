@@ -102,6 +102,23 @@ export const EditMaquina = ({ maquina, setShow, setFetchingMaquinaria, setmaquin
 						</div>
 					</form>
 					<form onSubmit={handleSubmit}>
+						<label>Tipo de maquina* {maquinaToUpdate?.category && <p className='preview'>{maquinaToUpdate?.category}</p>}</label>
+						<div className='button-input-group'>
+							<select onChange={handleInputChange} name='category' required>
+								<option defaultValue>Seleccionar...</option>
+
+								<option value='Maquinaria CNC'>Maquinaria CNC</option>
+								<option value='Otra maquinaria'>Otra maquinaria</option>
+								<option value='Maquinaria Convencional'>Maquinaria Convencional</option>
+							</select>
+
+							<button type='submit' className='my-btn mini third'>
+								Añadir
+							</button>
+						</div>
+					</form>
+
+					<form onSubmit={handleSubmit}>
 						<label>Imagen principal* {maquinaToUpdate?.image && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
 
 						<figure className='main-image'>
