@@ -20,4 +20,6 @@ export const types = {
 	maquinaDelete: '[Maquina] MaquinaDelete',
 	featuresUpdate: '[Maquina] featuresUpdate',
 	galleryUpdate: '[Maquina] galleryUpdate',
+
+	sectionUpdate: '[Section] sectionUpdate',
 }

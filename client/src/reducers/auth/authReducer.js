@@ -1,4 +1,4 @@
-const { types } = require('../types/types')
+import { types } from '../../types/types'
 
 export const AuthReducer = (state = {}, action) => {
 	switch (action.type) {

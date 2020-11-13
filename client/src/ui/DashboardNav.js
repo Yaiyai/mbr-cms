@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../auth/AuthContext'
+import { AuthContext } from './../reducers/auth/AuthContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { types } from '../types/types'
 
@@ -45,6 +45,8 @@ export const DashboardNav = ({ handleShow, sections }) => {
 					</li>
 				</ul>
 				<div className='btn-group'>
+					<small>Made with &hearts; by Yai</small>
+					<small>&copy; Mecánica Brañosera S.L.</small>
 					{user.email === 'admin@yai.com' && (
 						<button className='my-btn third mini' onClick={handleShow}>
 							Añadir Sección
@@ -53,8 +55,6 @@ export const DashboardNav = ({ handleShow, sections }) => {
 					<button className='my-btn secondary mini' onClick={handleLogout}>
 						Cerrar Sesión
 					</button>
-					<small>Made with &hearts; by Yai</small>
-					<small>&copy; Mecánica Brañosera S.L.</small>
 				</div>
 			</nav>
 		</>

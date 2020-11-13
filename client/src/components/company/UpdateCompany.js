@@ -28,12 +28,12 @@ export const UpdateCompany = ({ company, setFetchingCompany }) => {
 			...values,
 			[property]: '',
 		})
-		dispatch({ type: types.UpdateCompany, payload })
+		dispatch({ type: types.updateCompany, payload })
 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		dispatch({ type: types.UpdateCompany, payload: values })
+		dispatch({ type: types.updateCompany, payload: values })
 	}
 
 	const saveChanges = async () => {

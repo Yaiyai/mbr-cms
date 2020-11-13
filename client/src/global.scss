@@ -27,4 +27,6 @@ img {
 small {
 	font-weight: $weight-light;
 	@include font-line-height(10px);
+	text-align: center;
+	display: block;
 }

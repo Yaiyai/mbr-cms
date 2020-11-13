@@ -6,6 +6,10 @@ export const SectionsReducer = (state = [], action) => {
 			return {
 				...action.payload,
 			}
+		case types.sectionUpdate:
+			return {
+				...action.payload,
+			}
 
 		default:
 			return state

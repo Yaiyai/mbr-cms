@@ -131,16 +131,16 @@ export const AddSection = ({ setFetchingSections, handleClose }) => {
 					<label>Nombre de la sección* {values?.sectionName && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
 					<input type='text' onChange={handleInputChange} name='sectionName' autoComplete='off' placeholder='Nombre de la sección' required />
 
-					<label>Título {values?.sectionName && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
+					<label>Título {values?.title && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
 					<input type='text' onChange={handleInputChange} autoComplete='off' name='title' placeholder='Título' required />
 
-					<label>Subtítulo {values?.sectionName && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
+					<label>Subtítulo </label>
 					<input type='text' onChange={handleInputChange} autoComplete='off' name='subtitle' placeholder='Subtítulo' />
 
-					<label>Texto {values?.sectionName && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
+					<label>Texto </label>
 					<textarea type='text' onChange={handleInputChange} autoComplete='off' name='text' placeholder='Texto' />
 
-					<label>Imagen principal {values?.sectionName && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
+					<label>Imagen principal</label>
 					{uniqueImage && (
 						<figure className='unique-image'>
 							<img src={uniqueImage} alt='' />

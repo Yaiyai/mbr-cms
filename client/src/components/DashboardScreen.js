@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { AuthContext } from '../auth/AuthContext'
+import { AuthContext } from './../reducers/auth/AuthContext'
 
 export const DashboardScreen = () => {
 	const { user } = useContext(AuthContext)

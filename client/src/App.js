@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react'
-import { AuthContext } from './auth/AuthContext'
-import { AuthReducer } from './auth/authReducer'
+import { AuthContext } from './reducers/auth/AuthContext'
+import { AuthReducer } from './reducers/auth/authReducer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './global.scss'
 import { library } from '@fortawesome/fontawesome-svg-core'

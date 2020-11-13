@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { AuthContext } from '../auth/AuthContext'
+import { AuthContext } from './../reducers/auth/AuthContext'
 import { Navbar } from '../ui/Navbar'
 import { DashboardNav } from '../ui/DashboardNav'
 import { DashboardScreen } from '../components/DashboardScreen'
@@ -45,7 +45,7 @@ export const AppRouter = () => {
 									<Route exact path='/mbr' component={DashboardScreen} />
 									<Route path='/mbr/empresa' component={CompanyScreen} />
 									<Route path='/mbr/maquinaria' component={MaquinasScreen} />
-									<Route path='/mbr/seccion/:id' component={SectionScreen} />
+									<Route path='/mbr/seccion/:id' component={(props) => <SectionScreen {...props} setFetchingSections={setFetchingSections} />} />
 									<Redirect to='/mbr' />
 								</Switch>
 
@@ -76,6 +76,8 @@ export const AppRouter = () => {
 								<Route path='/registro' component={SignupScreen} />
 								<Redirect to='/' />
 							</Switch>
+							<small>Made with &hearts; by Yai</small>
+							<small>&copy; Mecánica Brañosera S.L.</small>
 						</main>
 					</>
 				)}
