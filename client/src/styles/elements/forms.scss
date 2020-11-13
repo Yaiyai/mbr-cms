@@ -1,0 +1,76 @@
+form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	.input-images {
+		display: flex;
+		justify-content: space-between;
+	}
+	select {
+		margin-bottom: calc(#{$module} / 2);
+	}
+	input,
+	textarea {
+		width: 100%;
+		border: none;
+		outline: none;
+		@include font-line-height($font-xs);
+
+		border-bottom: 1px solid map-get($theme-colors, 'primary');
+		margin-bottom: calc(#{$module} / 3);
+		&::placeholder {
+			@include font-line-height($font-xs);
+			padding: calc(#{$module} / 3);
+			padding-left: 0;
+		}
+		&:focus {
+			border: 1px solid map-get($theme-colors, 'secondary');
+		}
+		&.file-input {
+			width: 50%;
+			outline: none;
+			color: map-get($theme-colors, 'text');
+			font-weight: $weight-light;
+			@include font-line-height(10px);
+			margin-bottom: calc(#{$module} / 2);
+			border-bottom: none;
+			overflow: hidden;
+			&::-webkit-file-upload-button {
+				visibility: hidden;
+			}
+			&:focus {
+				border: none;
+			}
+			&::before {
+				content: 'Elegir archivo...';
+				background: white;
+				color: map-get($theme-colors, 'dark-grey');
+				border: 1px solid map-get($theme-colors, 'dark-grey');
+				height: 25px;
+				padding: calc(#{$module} / 6) calc(#{$module} / 4);
+				outline: none;
+				white-space: nowrap;
+				-webkit-user-select: none;
+				cursor: pointer;
+				font-size: 10px;
+				width: 100%;
+			}
+			&:hover {
+				&::before {
+					border-color: map-get($theme-colors, 'text');
+					color: map-get($theme-colors, 'text');
+				}
+			}
+			&:active {
+				&::before {
+					background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+				}
+			}
+		}
+	}
+	label {
+		@include font-line-height($font-xs);
+		margin-right: calc(#{$module} / 3);
+		font-weight: $weight-semibold;
+	}
+}

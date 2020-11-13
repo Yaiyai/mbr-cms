@@ -1,0 +1,10 @@
+.my-modals {
+	display: flex;
+	.modal-content {
+		width: 100%;
+	}
+}
+.modal-backdrop.show {
+	background-color: map-get($theme-colors, 'dark-primary');
+	backdrop-filter: blur(10px);
+}

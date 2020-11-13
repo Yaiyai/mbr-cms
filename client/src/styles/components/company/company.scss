@@ -1,0 +1,46 @@
+.add-form {
+	margin: $module auto;
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	input {
+		margin-bottom: calc(#{$module} / 2);
+	}
+}
+
+.editing {
+	padding: calc(#{$module} * 2) 0;
+	.edit-group {
+		margin: 0;
+		flex-direction: row;
+		padding: calc(#{$module} * 0.5) 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid map-get($theme-colors, 'primary');
+		&:first-child {
+			border-top: 1px solid map-get($theme-colors, 'primary');
+		}
+		figure {
+			width: 200px;
+			height: 100px;
+			margin: 0 calc(#{$module} * 2) 0 0;
+			overflow: hidden;
+			background-color: map-get($theme-colors, 'light-grey');
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+				object-position: center;
+			}
+		}
+		p {
+			margin: 0 calc(#{$module} * 2) 0 0;
+		}
+		.my-btn {
+			&.secondary {
+				margin-right: calc(#{$module} / 8);
+			}
+		}
+	}
+}

@@ -1,0 +1,175 @@
+.maquinas-head {
+	display: flex;
+	margin-bottom: calc(#{$module} * 2);
+	align-items: center;
+}
+.modal-width {
+	width: 70%;
+	max-width: none !important;
+}
+.all-maquinas {
+	flex-wrap: wrap;
+	display: flex;
+	.maquina-card {
+		@include items-grid(4, $module);
+		cursor: pointer;
+		background-color: white;
+		border-radius: 5px;
+		border: 2px solid map-get($theme-colors, 'light-primary');
+		padding: calc(#{$module} / 2);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		&:hover {
+			border-color: map-get($theme-colors, 'secondary');
+		}
+		.maquina-card-body {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			width: 100%;
+			figure {
+				width: 100%;
+				height: 200px;
+				overflow: hidden;
+				margin: 0;
+				img {
+					height: 100%;
+					object-position: center;
+					object-fit: contain;
+				}
+			}
+			.button-group {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				align-self: flex-end;
+				button {
+					min-width: 60px;
+					margin-top: calc(#{$module} / 3);
+				}
+			}
+		}
+	}
+}
+
+.check-ok {
+	color: map-get($theme-colors, 'light-primary');
+	width: 12px;
+	height: 12px;
+	margin-left: 5px;
+}
+.preview {
+	color: map-get($theme-colors, 'light-primary');
+	text-transform: uppercase;
+	@include font-line-height($font-sm);
+}
+.modal-edit {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.edit-maquina {
+		width: 100%;
+		display: flex;
+		margin-bottom: calc(#{$module} * 1);
+		padding-bottom: calc(#{$module} * 1);
+		border-bottom: 1px solid map-get($theme-colors, 'light-grey');
+		.button-input-group {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: $module;
+			input {
+				height: 25px;
+				width: 90%;
+				margin: 0;
+			}
+			.my-btn {
+				min-width: 10%;
+			}
+		}
+		.button-file-group {
+			margin-bottom: $module;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.file-input {
+				height: 25px;
+				margin-bottom: 0;
+				width: 90%;
+				background-color: map-get($theme-colors, 'light-grey');
+			}
+			.my-btn {
+				min-width: 10%;
+			}
+		}
+
+		.left-side,
+		.right-side {
+			display: flex;
+			flex-direction: column;
+		}
+		.left-side {
+			width: 49%;
+			margin-right: 2%;
+			.features {
+				.each-feat {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					font-size: 10px;
+					background-color: map-get($theme-colors, 'light-grey');
+					margin-bottom: calc(#{$module} / 6);
+					svg {
+						align-self: flex-end;
+						cursor: pointer;
+						width: 15px;
+						height: 15px;
+					}
+				}
+			}
+			.main-image {
+				width: 100px;
+				height: 100px;
+				overflow: hidden;
+				background-color: map-get($theme-colors, 'light-grey');
+				position: relative;
+				img {
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+			}
+		}
+		.right-side {
+			width: 49%;
+			.gallery {
+				display: flex;
+				flex-wrap: wrap;
+				margin-bottom: calc(#{$module} / 2);
+				.each-picture {
+					@include items-grid(6, calc(#{$module} / 6));
+					height: 50px;
+					overflow: hidden;
+					margin: 0;
+					background-color: map-get($theme-colors, 'light-grey');
+					position: relative;
+					img {
+						height: 100%;
+						object-fit: cover;
+						object-position: center;
+					}
+					.close-icon {
+						position: absolute;
+						top: 0;
+						right: 0;
+						cursor: pointer;
+						width: 15px;
+						height: 15px;
+						color: white;
+					}
+				}
+			}
+		}
+	}
+}

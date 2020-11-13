@@ -1,0 +1,22 @@
+.login-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: map-get($theme-colors, 'primary');
+	padding: calc(#{$module} / 4) calc(#{$module} * 1);
+	ul {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		a {
+			display: flex;
+			color: white;
+			margin: 0 calc(#{$module} / 3) 0 0;
+			&:hover {
+				text-decoration: none;
+				color: map-get($theme-colors, 'secondary');
+			}
+		}
+	}
+}

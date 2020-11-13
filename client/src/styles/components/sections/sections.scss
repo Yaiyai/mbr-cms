@@ -1,0 +1,110 @@
+.section-form {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-top: $module;
+
+	.left-side,
+	.right-side {
+		display: flex;
+		flex-direction: column;
+		input {
+			margin-bottom: $module;
+		}
+		.button-input-group {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: $module;
+			input {
+				height: 25px;
+				width: 90%;
+				margin: 0;
+			}
+			.my-btn {
+				min-width: 10%;
+			}
+		}
+
+		.button-file-group {
+			margin-bottom: $module;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.file-input {
+				height: 25px;
+				margin-bottom: 0;
+				width: 90%;
+				background-color: map-get($theme-colors, 'light-grey');
+			}
+			.my-btn {
+				min-width: 10%;
+			}
+		}
+	}
+	.left-side {
+		width: 49%;
+		margin-right: 2%;
+		.unique-image {
+			width: 100px;
+			height: 100px;
+			overflow: hidden;
+			margin: 0;
+			background-color: map-get($theme-colors, 'light-grey');
+			position: relative;
+			margin-bottom: calc(#{$module} / 2);
+			img {
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+	}
+	.right-side {
+		width: 49%;
+		.features {
+			.each-feat {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				font-size: 10px;
+				background-color: map-get($theme-colors, 'light-grey');
+				margin-bottom: calc(#{$module} / 6);
+				svg {
+					align-self: flex-end;
+					cursor: pointer;
+					width: 15px;
+					height: 15px;
+				}
+			}
+		}
+
+		.gallery {
+			display: flex;
+			flex-wrap: wrap;
+			margin-bottom: calc(#{$module} / 2);
+			.each-picture {
+				@include items-grid(6, calc(#{$module} / 6));
+				height: 100px;
+				overflow: hidden;
+				margin: 0;
+				background-color: map-get($theme-colors, 'light-grey');
+				position: relative;
+				img {
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+				.close-icon {
+					position: absolute;
+					top: 0;
+					right: 0;
+					cursor: pointer;
+					width: 15px;
+					height: 15px;
+					color: white;
+				}
+			}
+		}
+	}
+}
