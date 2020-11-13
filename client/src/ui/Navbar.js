@@ -7,10 +7,10 @@ export const Navbar = () => {
 			<div className='container'>
 				<ul>
 					<li>
-						<Link to='/auth/login'>Entrar</Link>
+						<Link to='/'>Entrar</Link>
 					</li>
 					<li>
-						<Link to='/auth/signup'>Registro</Link>
+						<Link to='/signup'>Registro</Link>
 					</li>
 				</ul>
 			</div>

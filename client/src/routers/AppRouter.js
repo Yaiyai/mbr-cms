@@ -42,11 +42,11 @@ export const AppRouter = () => {
 
 							<main>
 								<Switch>
-									<Route exact path='/' component={DashboardScreen} />
-									<Route path='/empresa' component={CompanyScreen} />
-									<Route path='/maquinaria' component={MaquinasScreen} />
-									<Route path='/seccion/:id' component={SectionScreen} />
-									<Redirect to='/' />
+									<Route exact path='/mbr' component={DashboardScreen} />
+									<Route path='/mbr/empresa' component={CompanyScreen} />
+									<Route path='/mbr/maquinaria' component={MaquinasScreen} />
+									<Route path='/mbr/seccion/:id' component={SectionScreen} />
+									<Redirect to='/mbr' />
 								</Switch>
 
 								<Modal dialogClassName='modal-width' centered className='my-modals' show={show} onHide={handleClose}>
@@ -73,9 +73,9 @@ export const AppRouter = () => {
 
 						<main className='container'>
 							<Switch>
-								<Route exact path='/auth' component={LoginScreen} />
-								<Route path='/auth/signup' component={SignupScreen} />
-								<Redirect to='/auth' />
+								<Route exact path='/' component={LoginScreen} />
+								<Route path='/signup' component={SignupScreen} />
+								<Redirect to='/' />
 							</Switch>
 						</main>
 					</>

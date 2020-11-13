@@ -17,17 +17,17 @@ export const DashboardNav = ({ handleShow, sections }) => {
 			<nav className='dash-nav'>
 				<ul>
 					<li>
-						<Link to='/'>
+						<Link to='/mbr'>
 							<figure>
 								<img src='https://res.cloudinary.com/mbr-app/image/upload/v1605125325/logoSecundario_lnnyol.svg' alt='' />
 							</figure>
 						</Link>
 					</li>
 					<li>
-						<Link to='/empresa'>Datos de empresa</Link>
+						<Link to='/mbr/empresa'>Datos de empresa</Link>
 					</li>
 					<li>
-						<Link to='/maquinaria'>Maquinaria</Link>
+						<Link to='/mbr/maquinaria'>Maquinaria</Link>
 					</li>
 					<li className='dropdown'>
 						<p data-toggle='dropdown'>
@@ -37,7 +37,7 @@ export const DashboardNav = ({ handleShow, sections }) => {
 							<ul className='dropdown-menu'>
 								{sections.map((st) => (
 									<li key={st._id}>
-										<Link to={`/seccion/${st._id}`}>{st.sectionName}</Link>
+										<Link to={`/mbr/seccion/${st._id}`}>{st.sectionName}</Link>
 									</li>
 								))}
 							</ul>
