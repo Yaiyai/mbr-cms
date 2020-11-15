@@ -19,6 +19,7 @@ router.post(
 		check('phone', 'el phone de la empresa es obligatorio').not().isEmpty(),
 		check('address', 'el address de la empresa es obligatorio').not().isEmpty(),
 		check('mainLogo', 'el mainLogo de la empresa es obligatorio').not().isEmpty(),
+		check('maquinasCategories', 'Es obligatorio al menos una categoría de maquinas').not().isEmpty(),
 		formValidator,
 	],
 	addCompany

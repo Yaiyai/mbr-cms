@@ -37,6 +37,10 @@ const companyModel = new Schema(
 		secondaryLogo: {
 			type: String,
 		},
+		maquinasCategories: {
+			type: Array,
+			required: true,
+		},
 	},
 	{
 		timestamps: true,
