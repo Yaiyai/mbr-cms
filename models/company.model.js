@@ -39,7 +39,6 @@ const companyModel = new Schema(
 		},
 		maquinasCategories: {
 			type: Array,
-			required: true,
 		},
 	},
 	{
