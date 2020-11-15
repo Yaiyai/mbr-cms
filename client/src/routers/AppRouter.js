@@ -20,6 +20,7 @@ export const AppRouter = () => {
 	const isMounted = useRef(true)
 	const { user } = useContext(AuthContext)
 	const [sections, dispatchSections] = useReducer(SectionsReducer, {})
+
 	useEffect(() => {
 		return () => {
 			isMounted.current = false
@@ -33,7 +34,7 @@ export const AppRouter = () => {
 				.then((data) => dispatchSections({ type: types.getSections, payload: data.sections }))
 				.catch((err) => new Error(err))
 		}
-	}, [isMounted])
+	}, [])
 
 	const [show, setShow] = useState(false)
 	const handleClose = () => setShow(false)

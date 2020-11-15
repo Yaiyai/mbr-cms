@@ -102,11 +102,90 @@
 					cursor: pointer;
 					width: 15px;
 					height: 15px;
-					color: white;
+					color: black;
 				}
 			}
 		}
 	}
 }
 .section-screen {
+	.edit-gallery,
+	.edit-features,
+	.edit-forminputs {
+		border-bottom: 1px solid map-get($theme-colors, 'primary');
+		padding: calc(#{$module} * 0.5) 0;
+		.features {
+			.each-feat {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				font-size: 10px;
+				background-color: map-get($theme-colors, 'light-grey');
+				margin-bottom: calc(#{$module} / 6);
+				svg {
+					align-self: flex-end;
+					cursor: pointer;
+					width: 15px;
+					height: 15px;
+				}
+			}
+		}
+		.button-input-group {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			input {
+				height: 25px;
+				width: 90%;
+				margin: 0;
+			}
+			.my-btn {
+				min-width: 10%;
+			}
+		}
+
+		.button-file-group {
+			margin-bottom: $module;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.file-input {
+				height: 25px;
+				margin-bottom: 0;
+				width: 90%;
+				background-color: map-get($theme-colors, 'light-grey');
+			}
+			.my-btn {
+				min-width: 10%;
+			}
+		}
+		.gallery {
+			display: flex;
+			flex-wrap: wrap;
+			margin-bottom: calc(#{$module} / 2);
+			margin-top: calc(#{$module} / 2);
+			.each-picture {
+				@include items-grid(6, calc(#{$module} / 6));
+				height: 100px;
+				overflow: hidden;
+				margin: 0;
+				background-color: map-get($theme-colors, 'light-grey');
+				position: relative;
+				img {
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+				.close-icon {
+					position: absolute;
+					top: 0;
+					right: 0;
+					cursor: pointer;
+					width: 15px;
+					height: 15px;
+					color: black;
+				}
+			}
+		}
+	}
 }

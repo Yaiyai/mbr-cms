@@ -15,7 +15,6 @@ export const SectionsReducer = (state = [], action) => {
 			return { ...action.payload }
 
 		case types.sectionUpdate:
-			console.log(action.payload)
 			return action.payload
 
 		default:
