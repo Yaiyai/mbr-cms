@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { fileUpload } from '../../helpers/uploadFiles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useForm from '../../hooks/useForm'
 import { addSection } from '../../actions/sections.action'
+import { SectionContext } from '../../reducers/sections/sectionsContext'
+import { types } from '../../types/types'
 // values, setValues, handleInputChange, handleFileChange, resetForm
-export const AddSection = ({ setFetchingSections, handleClose }) => {
+export const AddSection = ({ handleClose }) => {
+	const { dispatchSections } = useContext(SectionContext)
 	const [auxValue, setAuxValue] = useState()
 
 	const { values, setValues, handleInputChange, handleFileChange } = useForm()
@@ -109,8 +112,8 @@ export const AddSection = ({ setFetchingSections, handleClose }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		await addSection(values)
-		setFetchingSections(true)
+		const newSection = await addSection(values)
+		dispatchSections({ type: types.addSection, payload: newSection })
 		handleClose()
 	}
 

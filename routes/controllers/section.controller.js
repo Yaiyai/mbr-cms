@@ -35,7 +35,7 @@ const deleteSection = async (req, res) => {
 	const sectionID = req.params.sectionID
 
 	await Section.findByIdAndDelete(sectionID)
-		.then(() => res.status(201).json({ ok: true, msg: 'Sección borrada' }))
+		.then((data) => res.status(201).json({ ok: true, msg: 'Sección borrada' }))
 		.catch((err) => res.status(400).json({ ok: false, msg: 'Sección no borrada', err }))
 }
 

@@ -2,10 +2,13 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from './../reducers/auth/AuthContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { SectionContext } from '../reducers/sections/sectionsContext'
 import { types } from '../types/types'
 
-export const DashboardNav = ({ handleShow, sections }) => {
+export const DashboardNav = ({ handleShow }) => {
+	const { sections } = useContext(SectionContext)
 	const { dispatch, user } = useContext(AuthContext)
+
 	const handleLogout = async () => {
 		await dispatch({ type: types.logout })
 		await localStorage.removeItem('mbr-token')
@@ -33,7 +36,7 @@ export const DashboardNav = ({ handleShow, sections }) => {
 						<p data-toggle='dropdown'>
 							Secciones de la web <FontAwesomeIcon icon='chevron-down' />
 						</p>
-						{sections && (
+						{sections.length > 0 && (
 							<ul className='dropdown-menu'>
 								{sections.map((st) => (
 									<li key={st._id}>

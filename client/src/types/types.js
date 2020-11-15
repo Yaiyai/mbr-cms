@@ -21,5 +21,8 @@ export const types = {
 	featuresUpdate: '[Maquina] featuresUpdate',
 	galleryUpdate: '[Maquina] galleryUpdate',
 
+	getSections: '[Section] getSections',
 	sectionUpdate: '[Section] sectionUpdate',
+	deleteSection: '[Section] deleteSection',
+	updateThis: '[Section] updateThis',
 }

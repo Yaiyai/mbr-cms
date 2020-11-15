@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 
-export const EditGroupSection = ({ nameValue, deleteField, inputType, editLabel, editAction, editValue, submitEdit, imageEdit = false }) => {
+export const EditGroupSection = React.memo(({ nameValue, deleteField, inputType, editLabel, editAction, editValue, submitEdit, imageEdit = false }) => {
 	const [show, setShow] = useState(false)
 
 	const handleClose = () => setShow(false)
@@ -64,4 +64,4 @@ export const EditGroupSection = ({ nameValue, deleteField, inputType, editLabel,
 			</Modal>
 		</>
 	)
-}
+})

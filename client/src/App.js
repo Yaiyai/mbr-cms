@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer, useRef, useState } from 'react'
 import { AuthContext } from './reducers/auth/AuthContext'
 import { AuthReducer } from './reducers/auth/authReducer'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -14,17 +14,19 @@ const init = () => {
 	return JSON.parse(localStorage.getItem('mbr-user')) || { logged: false }
 }
 const App = () => {
+	const isMounted = useRef(true)
 	const [user, dispatch] = useReducer(AuthReducer, {}, init)
-	const [fetchingUser, setFetchingUser] = useState(true)
+	useEffect(() => {
+		return () => {
+			isMounted.current = false
+		}
+	}, [])
 
 	useEffect(() => {
-		if (fetchingUser) {
+		if (isMounted.current) {
 			localStorage.setItem('mbr-user', JSON.stringify(user))
 		}
-		return () => {
-			setFetchingUser(false)
-		}
-	}, [user, fetchingUser])
+	}, [user])
 
 	return (
 		<>

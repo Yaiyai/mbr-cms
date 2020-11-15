@@ -1,44 +1,49 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useRef } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { deleteSection, updateSection } from '../actions/sections.action'
 import { fetchSinToken } from '../helpers/fetch'
 import useForm from '../hooks/useForm'
+import Swal from 'sweetalert2'
 import { AuthContext } from './../reducers/auth/AuthContext'
-import { SectionsReducer } from '../reducers/SectionsReducer'
 import { types } from '../types/types'
 import { EditGroupSection } from './sections/EditGroupSection'
+import { SectionsReducer } from '../reducers/sections/SectionsReducer'
+import { SectionContext } from '../reducers/sections/sectionsContext'
 
-export const SectionScreen = ({ setFetchingSections }) => {
+export const SectionScreen = () => {
+	const isMounted = useRef(true)
 	const [thisSection, dispatch] = useReducer(SectionsReducer)
-	const [fetching, setFetching] = useState(true)
 	const { id } = useParams()
 	const history = useHistory()
 
 	const { user } = useContext(AuthContext)
+	const { dispatchSections } = useContext(SectionContext)
 
-	const { values, setValues, handleInputChange } = useForm()
-	const { title, text, subtitle, _id: idSection } = values
+	const { values, setValues, handleInputChange, handleFileChange } = useForm()
+	const { title, text, subtitle, _id: idSection, uniqueImage } = values
 
 	useEffect(() => {
-		if (fetching) {
+		return () => {
+			isMounted.current = false
+		}
+	}, [])
+
+	useEffect(() => {
+		if (isMounted.current) {
 			fetchSinToken(`section/${id}`)
 				.then((data) => data.json())
 				.then((data) => {
 					setValues(data.section)
 					dispatch({ type: types.addSection, payload: data.section })
 				})
-				// .then(() => setFetching(false))
 				.catch((err) => new Error(err))
 		}
-		return () => {
-			setFetching(false)
-		}
-	}, [fetching, setValues, id])
+	}, [setValues, id])
 
 	const handleDelete = async () => {
 		history.push('/mbr')
-		setFetchingSections(true)
-		await deleteSection(id)
+		const sectionGroup = await deleteSection(id)
+		dispatchSections({ type: types.deleteSection, payload: sectionGroup })
 	}
 
 	const deleteField = async (property) => {
@@ -55,11 +60,14 @@ export const SectionScreen = ({ setFetchingSections }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		dispatch({ type: types.sectionUpdate, payload: values })
+		dispatch({ type: types.updateThis, payload: values })
 	}
 
 	const saveChanges = async () => {
-		await updateSection(thisSection, idSection)
+		const sectionUpdated = await updateSection(thisSection, idSection)
+		// console.log(sectionUpdated)
+		dispatchSections({ type: types.sectionUpdate, payload: sectionUpdated })
+		Swal.fire('¡Chachi!', 'Los cambios han sido guardados', 'success')
 	}
 
 	return (
@@ -67,9 +75,11 @@ export const SectionScreen = ({ setFetchingSections }) => {
 			<h1>
 				Sección <span>{thisSection?.sectionName}</span>
 			</h1>
+
 			<button className='my-btn mini' onClick={saveChanges}>
 				Guardar Cambios
 			</button>
+
 			{user.email === 'admin@yai.com' && (
 				<button className='my-btn secondary mini' onClick={handleDelete}>
 					Borrar esta empresa
@@ -92,6 +102,18 @@ export const SectionScreen = ({ setFetchingSections }) => {
 			)}
 			{text && (
 				<EditGroupSection nameValue={'text'} deleteField={deleteField} inputType='text' editLabel={'Texto'} editAction={handleInputChange} editValue={thisSection?.text} submitEdit={handleSubmit} />
+			)}
+			{uniqueImage && (
+				<EditGroupSection
+					imageEdit={true}
+					nameValue={'uniqueImage'}
+					deleteField={deleteField}
+					inputType='file'
+					editLabel={'Imagen principal'}
+					editAction={handleFileChange}
+					editValue={thisSection?.uniqueImage}
+					submitEdit={handleSubmit}
+				/>
 			)}
 		</section>
 	)
