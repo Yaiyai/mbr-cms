@@ -98,6 +98,9 @@ export const AddMaquina = ({ setShow, setmaquinaSelected, setFetchingMaquinaria 
 
 	return (
 		<article className='modal-edit'>
+			<p>
+				Para que lo que se introduzca funcione, tienes que escribir lo que sea, darle al botón "Añadir" y esperar a que salga este icono. <FontAwesomeIcon className='check-ok' icon='check-circle' />
+			</p>
 			<div className='edit-maquina'>
 				<div className='left-side'>
 					<form onSubmit={handleSubmit}>

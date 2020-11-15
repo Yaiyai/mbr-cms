@@ -38,15 +38,15 @@ export const AddSection = ({ handleClose }) => {
 				...values,
 				formInputs: [auxValue],
 			})
-			clearInput('to-reset-inputs')
+			clearInput('to-reset-section-inputs')
 		} else if (!formInputs?.includes(auxValue)) {
 			setValues({
 				...values,
 				formInputs: [...formInputs, auxValue],
 			})
-			clearInput('to-reset-inputs')
+			clearInput('to-reset-section-inputs')
 		}
-		clearInput('to-reset-inputs')
+		clearInput('to-reset-section-inputs')
 	}
 	const deleteFeature = (idx) => {
 		const featCopy = [...features]
@@ -68,15 +68,15 @@ export const AddSection = ({ handleClose }) => {
 				...values,
 				features: [auxValue],
 			})
-			clearInput('to-reset-features')
+			clearInput('to-reset-section-features')
 		} else if (!features?.includes(auxValue)) {
 			setValues({
 				...values,
 				features: [...features, auxValue],
 			})
-			clearInput('to-reset-features')
+			clearInput('to-reset-section-features')
 		}
-		clearInput('to-reset-features')
+		clearInput('to-reset-section-features')
 	}
 
 	const handleGalleryChange = async ({ target }) => {
@@ -181,7 +181,7 @@ export const AddSection = ({ handleClose }) => {
 						))}
 					</div>
 					<div className='button-input-group'>
-						<input type='text' id='to-reset-features' onChange={handleFeatureChange} placeholder={'Añadir Característica'} name='features' />
+						<input type='text' id='to-reset-section-features' onChange={handleFeatureChange} placeholder={'Añadir Característica'} name='features' />
 						<button onClick={handleAddFeature} className='my-btn mini third'>
 							Añadir
 						</button>
@@ -197,7 +197,7 @@ export const AddSection = ({ handleClose }) => {
 						))}
 					</div>
 					<div className='button-input-group'>
-						<input type='text' id='to-reset-inputs' onChange={handleChangeFormInput} placeholder={'Añadir Input'} name='formInputs' />
+						<input type='text' id='to-reset-section-inputs' onChange={handleChangeFormInput} placeholder={'Añadir Input'} name='formInputs' />
 						<button onClick={handleAddFormInput} className='my-btn mini third'>
 							Añadir
 						</button>
