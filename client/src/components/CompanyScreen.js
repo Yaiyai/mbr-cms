@@ -1,25 +1,17 @@
-import React, { useEffect, useReducer, useState } from 'react'
-import { fetchSinToken } from '../helpers/fetch'
-import { CompanyReducer } from '../reducers/CompanyReducer'
-import { types } from '../types/types'
+import React, { useEffect, useRef, useContext } from 'react'
 import { UpdateCompany } from './company/UpdateCompany'
 import { AddCompany } from './company/AddCompany'
+import { CompanyContext } from '../reducers/CompanyContext'
 
 export const CompanyScreen = () => {
-	const [fetchingCompany, setFetchingCompany] = useState(true)
-	const [companyData, dispatchCompanyData] = useReducer(CompanyReducer, {})
+	const isMounted = useRef(true)
+	const { company } = useContext(CompanyContext)
 
 	useEffect(() => {
-		if (fetchingCompany) {
-			fetchSinToken('company')
-				.then((data) => data.json())
-				.then((data) => dispatchCompanyData({ type: types.getCompany, payload: data.company[0] }))
-				.catch((err) => new Error(err))
-		}
 		return () => {
-			setFetchingCompany(false)
+			isMounted.current = false
 		}
-	}, [fetchingCompany, companyData])
+	}, [])
 
-	return <>{companyData._id ? <UpdateCompany company={companyData} setFetchingCompany={setFetchingCompany} /> : <AddCompany setFetchingCompany={setFetchingCompany} company={companyData} />}</>
+	return <>{company._id ? <UpdateCompany /> : <AddCompany />}</>
 }

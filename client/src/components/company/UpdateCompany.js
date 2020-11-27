@@ -1,22 +1,54 @@
-import React, { useReducer } from 'react'
+import React, { useContext, useState } from 'react'
 import Swal from 'sweetalert2'
-import { CompanyReducer } from '../../reducers/CompanyReducer'
 import { EditGroup } from './EditGroup'
 import useForm from './../../hooks/useForm'
 import { deleteCompany, updateCompany } from './../../actions/company.action'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { types } from '../../types/types'
+import { CompanyContext } from '../../reducers/CompanyContext'
 
-export const UpdateCompany = ({ company, setFetchingCompany }) => {
-	const [companyToUpdate, dispatch] = useReducer(CompanyReducer, company)
-	const { name, phone, address, _id: id, mainEmail, mainLogo, secondaryLogo, linkedin, facebook, twitter, instagram } = companyToUpdate
-	const { values, setValues, handleInputChange, handleFileChange } = useForm(companyToUpdate)
+export const UpdateCompany = () => {
+	const [auxValue, setAuxValue] = useState()
+	const { company, dispatchCompany } = useContext(CompanyContext)
+
+	const { name, phone, address, _id: id, mainEmail, mainLogo, secondaryLogo, linkedin, facebook, twitter, instagram, maquinasCategories } = company
+	const { values, setValues, handleInputChange, handleFileChange } = useForm(company)
+
+	const clearInput = () => {
+		const theinput = document.getElementById('to-reset-maq-feat')
+		theinput.value = ''
+	}
+
+	const handleFeatureChange = (e) => {
+		setAuxValue(e.target.value)
+	}
+
+	const handleAddFeature = (e) => {
+		e.preventDefault()
+		if (!maquinasCategories.includes(auxValue)) {
+			setValues({
+				...values,
+				maquinasCategories: [...maquinasCategories, auxValue],
+			})
+			dispatchCompany({ type: types.maquinasCategoriesUpdate, payload: [...maquinasCategories, auxValue] })
+			clearInput()
+		}
+		clearInput()
+	}
+
+	const deleteFeature = (idx) => {
+		const categoriesCopy = [...maquinasCategories]
+		categoriesCopy.splice(idx, 1)
+		setValues({
+			...values,
+			maquinasCategories: categoriesCopy,
+		})
+		dispatchCompany({ type: types.maquinasCategoriesUpdate, payload: categoriesCopy })
+	}
 
 	const handleDelete = async () => {
 		await deleteCompany(id)
-		dispatch({ type: types.companyDelete })
-		//Lift updated state to Company Screen
-		setFetchingCompany(true)
-		company = companyToUpdate
+		dispatchCompany({ type: types.companyDelete })
 	}
 
 	const deleteField = async (property) => {
@@ -28,19 +60,16 @@ export const UpdateCompany = ({ company, setFetchingCompany }) => {
 			...values,
 			[property]: '',
 		})
-		dispatch({ type: types.updateCompany, payload })
+		dispatchCompany({ type: types.updateCompany, payload })
 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		dispatch({ type: types.updateCompany, payload: values })
+		dispatchCompany({ type: types.updateCompany, payload: values })
 	}
 
 	const saveChanges = async () => {
-		await updateCompany(id, companyToUpdate)
-		//Lift updated state to Company Screen
-		setFetchingCompany(true)
-		company = companyToUpdate
+		await updateCompany(id, company)
 		Swal.fire('¡Chachi!', 'Los cambios han sido guardados', 'success')
 	}
 
@@ -83,6 +112,26 @@ export const UpdateCompany = ({ company, setFetchingCompany }) => {
 				<EditGroup deleteField={deleteField} nameValue={'facebook'} inputType={'text'} editLabel={'Facebook url'} editAction={handleInputChange} editValue={facebook} submitEdit={handleSubmit} />
 				<EditGroup deleteField={deleteField} nameValue={'instagram'} inputType={'text'} editLabel={'Instagram Url'} editAction={handleInputChange} editValue={instagram} submitEdit={handleSubmit} />
 				<EditGroup deleteField={deleteField} nameValue={'linkedin'} inputType={'text'} editLabel={'Linkedin Url'} editAction={handleInputChange} editValue={linkedin} submitEdit={handleSubmit} />
+
+				<div className='edit-group categories'>
+					<form onSubmit={handleAddFeature}>
+						<p className='maq-cat-title'>Categorías de máquinas:</p>
+						<div className='features'>
+							{maquinasCategories?.map((ft, idx) => (
+								<div className='each-feat' key={ft}>
+									{ft}
+									<FontAwesomeIcon onClick={() => deleteFeature(idx)} icon='times-circle' />
+								</div>
+							))}
+						</div>
+						<div className='button-input-group'>
+							<input type='text' id='to-reset-maq-feat' onChange={handleFeatureChange} placeholder={'Añadir Característica'} name='features' />
+							<button type='submit' className='my-btn mini third'>
+								Añadir
+							</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</>
 	)

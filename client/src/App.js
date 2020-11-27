@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef, useState } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 import { AuthContext } from './reducers/auth/AuthContext'
 import { AuthReducer } from './reducers/auth/authReducer'
 import 'bootstrap/dist/css/bootstrap.min.css'

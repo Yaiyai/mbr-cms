@@ -18,6 +18,11 @@ export const CompanyReducer = (state = [], action) => {
 			return {
 				...action.payload,
 			}
+		case types.maquinasCategoriesUpdate:
+			return {
+				...state,
+				maquinasCategories: action.payload,
+			}
 		case types.companyDelete:
 			return {}
 		default:

@@ -8,6 +8,7 @@ export const types = {
 	addCompany: '[company] addCompany',
 	companyUpdate: '[company] companyUpdate',
 	companyDelete: '[company] companyDelete',
+	maquinasCategoriesUpdate: '[company] maquinasCategoriesUpdate',
 	deleteProperty: '[company] deleteProperty',
 
 	addSection: '[sections] addSection',

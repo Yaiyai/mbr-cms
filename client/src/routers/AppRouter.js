@@ -15,11 +15,14 @@ import { AddSection } from '../components/sections/AddSection'
 import { SectionsReducer } from '../reducers/sections/SectionsReducer'
 import { SectionContext } from '../reducers/sections/sectionsContext'
 import { types } from '../types/types'
+import { CompanyContext } from '../reducers/CompanyContext'
+import { CompanyReducer } from '../reducers/CompanyReducer'
 
 export const AppRouter = () => {
 	const isMounted = useRef(true)
 	const { user } = useContext(AuthContext)
 	const [sections, dispatchSections] = useReducer(SectionsReducer, {})
+	const [company, dispatchCompany] = useReducer(CompanyReducer, {})
 
 	useEffect(() => {
 		return () => {
@@ -33,6 +36,10 @@ export const AppRouter = () => {
 				.then((data) => data.json())
 				.then((data) => dispatchSections({ type: types.getSections, payload: data.sections }))
 				.catch((err) => new Error(err))
+			fetchSinToken(`company`)
+				.then((data) => data.json())
+				.then((data) => dispatchCompany({ type: types.getCompany, payload: data.company[0] }))
+				.catch((err) => new Error(err))
 		}
 	}, [])
 
@@ -45,36 +52,38 @@ export const AppRouter = () => {
 			<div>
 				{user.token ? (
 					<>
-						<SectionContext.Provider value={{ sections, dispatchSections }}>
-							<div className='dashboard-container'>
-								<DashboardNav handleShow={handleShow} />
+						<CompanyContext.Provider value={{ company, dispatchCompany }}>
+							<SectionContext.Provider value={{ sections, dispatchSections }}>
+								<div className='dashboard-container'>
+									<DashboardNav handleShow={handleShow} />
 
-								<main>
-									<Switch>
-										<Route exact path='/mbr' component={DashboardScreen} />
-										<Route path='/mbr/empresa' component={CompanyScreen} />
-										<Route path='/mbr/maquinaria' component={MaquinasScreen} />
-										<Route path='/mbr/seccion/:id' component={(props) => <SectionScreen {...props} />} />
-										<Redirect to='/mbr' />
-									</Switch>
+									<main>
+										<Switch>
+											<Route exact path='/mbr' component={DashboardScreen} />
+											<Route path='/mbr/empresa' component={CompanyScreen} />
+											<Route path='/mbr/maquinaria' component={MaquinasScreen} />
+											<Route path='/mbr/seccion/:id' component={(props) => <SectionScreen {...props} />} />
+											<Redirect to='/mbr' />
+										</Switch>
 
-									<Modal dialogClassName='modal-width' centered className='my-modals' show={show} onHide={handleClose}>
-										<Modal.Header>
-											<h1>Añadir Sección a la web</h1>
-										</Modal.Header>
-										<Modal.Body>
-											<AddSection handleClose={handleClose} />
-										</Modal.Body>
+										<Modal dialogClassName='modal-width' centered className='my-modals' show={show} onHide={handleClose}>
+											<Modal.Header>
+												<h1>Añadir Sección a la web</h1>
+											</Modal.Header>
+											<Modal.Body>
+												<AddSection handleClose={handleClose} />
+											</Modal.Body>
 
-										<Modal.Footer>
-											<button className='my-btn mini secondary' onClick={handleClose}>
-												cerrar
-											</button>
-										</Modal.Footer>
-									</Modal>
-								</main>
-							</div>
-						</SectionContext.Provider>
+											<Modal.Footer>
+												<button className='my-btn mini secondary' onClick={handleClose}>
+													cerrar
+												</button>
+											</Modal.Footer>
+										</Modal>
+									</main>
+								</div>
+							</SectionContext.Provider>
+						</CompanyContext.Provider>
 					</>
 				) : (
 					<>

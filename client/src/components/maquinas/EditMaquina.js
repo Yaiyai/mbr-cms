@@ -1,13 +1,16 @@
-import React, { useReducer, useState } from 'react'
+import React, { useContext, useReducer, useState } from 'react'
 import useForm from '../../hooks/useForm'
 import { MaquinasReducer } from '../../reducers/MaquinasReducer'
 import { types } from '../../types/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { updateMaquina } from '../../actions/maquina.action'
 import { fileUpload } from '../../helpers/uploadFiles'
+import { CompanyContext } from '../../reducers/CompanyContext'
 
 export const EditMaquina = ({ maquina, setShow, setFetchingMaquinaria, setmaquinaSelected }) => {
 	const [auxValue, setAuxValue] = useState()
+	const { company } = useContext(CompanyContext)
+	const { maquinasCategories } = company
 
 	const [maquinaToUpdate, dispatch] = useReducer(MaquinasReducer, maquina)
 	const { values, setValues, handleInputChange, handleFileChange } = useForm(maquinaToUpdate)
@@ -107,9 +110,12 @@ export const EditMaquina = ({ maquina, setShow, setFetchingMaquinaria, setmaquin
 							<select onChange={handleInputChange} name='category' required>
 								<option defaultValue>Seleccionar...</option>
 
-								<option value='Maquinaria CNC'>Maquinaria CNC</option>
-								<option value='Otra maquinaria'>Otra maquinaria</option>
-								<option value='Maquinaria Convencional'>Maquinaria Convencional</option>
+								{maquinasCategories &&
+									maquinasCategories.map((cat) => (
+										<option key={cat} value={cat}>
+											{cat}
+										</option>
+									))}
 							</select>
 
 							<button type='submit' className='my-btn mini third'>
