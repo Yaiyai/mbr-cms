@@ -9,6 +9,7 @@ import { EditGroupSection } from './sections/EditGroupSection'
 import { SectionContext } from '../reducers/sections/sectionsContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fileUpload } from '../helpers/uploadFiles'
+import TextEditor from '../ui/TextEditor'
 
 export const SectionScreen = () => {
 	const { user } = useContext(AuthContext)
@@ -19,6 +20,18 @@ export const SectionScreen = () => {
 	const history = useHistory()
 	let thisSection = useRef()
 	const [auxValue, setAuxValue] = useState()
+	const [quill, setQuill] = useState()
+	const handleQuill = (e) => {
+		e.preventDefault()
+		setValues({
+			...values,
+			text: quill,
+		})
+	}
+
+	const createHTLM = (text) => {
+		return { __html: text }
+	}
 
 	useEffect(() => {
 		if (sections.length > 0) {
@@ -183,10 +196,6 @@ export const SectionScreen = () => {
 						submitEdit={handleSubmit}
 					/>
 				)}
-				{text && (
-					<EditGroupSection nameValue={'text'} deleteField={deleteField} inputType='text' editLabel={'Texto'} editAction={handleInputChange} editValue={values?.text} submitEdit={handleSubmit} />
-				)}
-
 				{uniqueImage && (
 					<EditGroupSection
 						imageEdit={true}
@@ -254,6 +263,15 @@ export const SectionScreen = () => {
 							</button>
 						</div>
 					</div>
+				)}
+				{text && (
+					<>
+						<section className='edit-group'>
+							<p>Texto:</p>
+							<div dangerouslySetInnerHTML={createHTLM(text)}></div>
+						</section>
+						<TextEditor setQuill={setQuill} handleQuill={handleQuill} />
+					</>
 				)}
 			</section>
 		</>

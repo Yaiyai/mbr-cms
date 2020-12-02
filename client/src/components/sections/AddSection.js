@@ -5,13 +5,23 @@ import useForm from '../../hooks/useForm'
 import { addSection } from '../../actions/sections.action'
 import { SectionContext } from '../../reducers/sections/sectionsContext'
 import { types } from '../../types/types'
+import TextEditor from '../../ui/TextEditor'
 // values, setValues, handleInputChange, handleFileChange, resetForm
 export const AddSection = ({ handleClose }) => {
 	const { dispatchSections } = useContext(SectionContext)
 	const [auxValue, setAuxValue] = useState()
+	const [quill, setQuill] = useState()
 
 	const { values, setValues, handleInputChange, handleFileChange } = useForm()
 	const { uniqueImage, gallery, features, formInputs } = values
+
+	const handleQuill = (e) => {
+		e.preventDefault()
+		setValues({
+			...values,
+			text: quill,
+		})
+	}
 
 	const clearInput = (input) => {
 		const theinput = document.getElementById(input)
@@ -141,7 +151,7 @@ export const AddSection = ({ handleClose }) => {
 					<input type='text' onChange={handleInputChange} autoComplete='off' name='subtitle' placeholder='Subtítulo' />
 
 					<label>Texto </label>
-					<textarea type='text' onChange={handleInputChange} autoComplete='off' name='text' placeholder='Texto' />
+					{/* <textarea type='text' onChange={handleInputChange} autoComplete='off'  placeholder='Texto' /> */}
 
 					<label>Imagen principal</label>
 					{uniqueImage && (
@@ -207,6 +217,7 @@ export const AddSection = ({ handleClose }) => {
 					Guardar Datos
 				</button>
 			</form>
+			<TextEditor setQuill={setQuill} handleQuill={handleQuill} />
 		</>
 	)
 }
