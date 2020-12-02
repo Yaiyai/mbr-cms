@@ -11,8 +11,8 @@ const TextEditor = ({ setQuill, handleQuill }) => {
 
 	return (
 		<div>
-			<div className='text-editor' style={{ marginBottom: '40px' }}>
-				<ReactQuill modules={TextEditor.modules} formats={TextEditor.formats} theme='snow' value={value} onChange={setValue} style={{ height: '300px' }} />
+			<div className='text-editor'>
+				<ReactQuill modules={TextEditor.modules} formats={TextEditor.formats} theme='snow' value={value} onChange={setValue} />
 			</div>
 			<form onSubmit={handleQuill}>
 				<button type='submit' className='my-btn mini secondary'>
@@ -25,7 +25,7 @@ const TextEditor = ({ setQuill, handleQuill }) => {
 
 TextEditor.modules = {
 	toolbar: [
-		[{ header: '4' }, { header: '5' }, { font: [] }],
+		// [{ header: '1' }, { header: '2' }, { font: [] }],
 		[{ size: [] }],
 		['bold', 'italic', 'underline', 'strike', 'blockquote'],
 		[{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],

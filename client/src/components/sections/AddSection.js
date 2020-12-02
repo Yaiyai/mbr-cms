@@ -129,7 +129,7 @@ export const AddSection = ({ handleClose }) => {
 
 	return (
 		<>
-			<form className='section-form' onSubmit={handleSubmit}>
+			<section className='section-form'>
 				<div className='left-side'>
 					<label>Tipo de sección* {values?.sectionType && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
 					<select onChange={handleInputChange} name='sectionType' required>
@@ -150,9 +150,6 @@ export const AddSection = ({ handleClose }) => {
 					<label>Subtítulo </label>
 					<input type='text' onChange={handleInputChange} autoComplete='off' name='subtitle' placeholder='Subtítulo' />
 
-					<label>Texto </label>
-					{/* <textarea type='text' onChange={handleInputChange} autoComplete='off'  placeholder='Texto' /> */}
-
 					<label>Imagen principal</label>
 					{uniqueImage && (
 						<figure className='unique-image'>
@@ -161,9 +158,6 @@ export const AddSection = ({ handleClose }) => {
 					)}
 
 					<input className='file-input' type='file' onChange={handleFileChange} name='uniqueImage' />
-				</div>
-
-				<div className='right-side'>
 					<label htmlFor=''>Galería de imágenes</label>
 					<div className='gallery'>
 						{gallery?.map((picture, idx) => (
@@ -180,7 +174,11 @@ export const AddSection = ({ handleClose }) => {
 							Añadir
 						</button>
 					</div>
+				</div>
 
+				<div className='right-side'>
+					<label>Texto </label>
+					<TextEditor setQuill={setQuill} handleQuill={handleQuill} />
 					<label htmlFor=''>Características</label>
 					<div className='features'>
 						{features?.map((ft, idx) => (
@@ -213,11 +211,13 @@ export const AddSection = ({ handleClose }) => {
 						</button>
 					</div>
 				</div>
+			</section>
+
+			<form className='section-form' onSubmit={handleSubmit}>
 				<button className='my-btn mini' type='submit'>
 					Guardar Datos
 				</button>
 			</form>
-			<TextEditor setQuill={setQuill} handleQuill={handleQuill} />
 		</>
 	)
 }

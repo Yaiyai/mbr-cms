@@ -3,6 +3,9 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	margin-top: $module;
+	.my-btn {
+		z-index: 2;
+	}
 
 	.left-side,
 	.right-side {
@@ -109,6 +112,12 @@
 	}
 }
 .section-screen {
+	.text-editor-group {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		margin-bottom: $module;
+	}
 	.edit-gallery,
 	.edit-features,
 	.edit-forminputs {

@@ -266,7 +266,7 @@ export const SectionScreen = () => {
 				)}
 				{text && (
 					<>
-						<section className='edit-group'>
+						<section className='edit-group text-editor-group'>
 							<p>Texto:</p>
 							<div dangerouslySetInnerHTML={createHTLM(text)}></div>
 						</section>
