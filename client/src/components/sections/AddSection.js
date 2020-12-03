@@ -6,7 +6,8 @@ import { addSection } from '../../actions/sections.action'
 import { SectionContext } from '../../reducers/sections/sectionsContext'
 import { types } from '../../types/types'
 import TextEditor from '../../ui/TextEditor'
-// values, setValues, handleInputChange, handleFileChange, resetForm
+import Swal from 'sweetalert2'
+
 export const AddSection = ({ handleClose }) => {
 	const { dispatchSections } = useContext(SectionContext)
 	const [auxValue, setAuxValue] = useState()
@@ -20,6 +21,18 @@ export const AddSection = ({ handleClose }) => {
 		setValues({
 			...values,
 			text: quill,
+		})
+		handleParsedText(quill)
+	}
+
+	const createHTLM = (text) => {
+		return { __html: text }
+	}
+
+	const handleParsedText = (text) => {
+		setValues({
+			...values,
+			parsedText: createHTLM(text),
 		})
 	}
 
@@ -123,7 +136,12 @@ export const AddSection = ({ handleClose }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		const newSection = await addSection(values)
-		dispatchSections({ type: types.addSection, payload: newSection })
+		if (!newSection) {
+			Swal.fire('¡Oh-oh!', 'Ha habido un error, inténtalo de nuevo', 'error')
+		} else {
+			Swal.fire('¡Chachi!', 'Los cambios han sido guardados', 'success')
+			dispatchSections({ type: types.addSection, payload: newSection })
+		}
 		handleClose()
 	}
 

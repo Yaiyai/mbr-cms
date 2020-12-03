@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { updateMaquina } from '../../actions/maquina.action'
 import { fileUpload } from '../../helpers/uploadFiles'
 import { CompanyContext } from '../../reducers/CompanyContext'
+import Swal from 'sweetalert2'
 
 export const EditMaquina = ({ maquina, setShow, setFetchingMaquinaria, setmaquinaSelected }) => {
 	const [auxValue, setAuxValue] = useState()
@@ -84,11 +85,15 @@ export const EditMaquina = ({ maquina, setShow, setFetchingMaquinaria, setmaquin
 	}
 
 	const saveChanges = async () => {
-		await updateMaquina(id, maquinaToUpdate)
-
-		await setFetchingMaquinaria(true)
-		await setmaquinaSelected(maquinaToUpdate)
-		await setShow(false)
+		const maquinaUpdated = await updateMaquina(id, maquinaToUpdate)
+		if (!maquinaUpdated) {
+			Swal.fire('¡Oh-oh!', 'Ha habido un error, inténtalo de nuevo', 'error')
+		} else {
+			Swal.fire('¡Chachi!', 'Los cambios han sido guardados', 'success')
+			await setFetchingMaquinaria(true)
+			await setmaquinaSelected(maquinaToUpdate)
+			await setShow(false)
+		}
 	}
 
 	return (

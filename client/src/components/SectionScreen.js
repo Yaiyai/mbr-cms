@@ -16,7 +16,7 @@ export const SectionScreen = () => {
 	const { dispatchSections, sections } = useContext(SectionContext)
 	const { id } = useParams()
 	const { values, setValues, handleInputChange, handleFileChange } = useForm()
-	const { title, text, subtitle, _id: idSection, uniqueImage, gallery, features, formInputs } = values
+	const { title, text, parsedText, subtitle, _id: idSection, uniqueImage, gallery, features, formInputs } = values
 	const history = useHistory()
 	let thisSection = useRef()
 	const [auxValue, setAuxValue] = useState()
@@ -27,10 +27,6 @@ export const SectionScreen = () => {
 			...values,
 			text: quill,
 		})
-	}
-
-	const createHTLM = (text) => {
-		return { __html: text }
 	}
 
 	useEffect(() => {
@@ -161,8 +157,12 @@ export const SectionScreen = () => {
 
 	const saveChanges = async () => {
 		const sectionUpdated = await updateSection(values, idSection)
-		dispatchSections({ type: types.sectionUpdate, payload: sectionUpdated })
-		Swal.fire('¡Chachi!', 'Los cambios han sido guardados', 'success')
+		if (!sectionUpdated) {
+			Swal.fire('¡Oh-oh!', 'Ha habido un error, inténtalo de nuevo', 'error')
+		} else {
+			Swal.fire('¡Chachi!', 'Los cambios han sido guardados', 'success')
+			dispatchSections({ type: types.sectionUpdate, payload: sectionUpdated })
+		}
 	}
 
 	return (
@@ -268,7 +268,7 @@ export const SectionScreen = () => {
 					<>
 						<section className='edit-group text-editor-group'>
 							<p>Texto:</p>
-							<div dangerouslySetInnerHTML={createHTLM(text)}></div>
+							<div dangerouslySetInnerHTML={parsedText}></div>
 						</section>
 						<TextEditor setQuill={setQuill} handleQuill={handleQuill} />
 					</>

@@ -6,6 +6,7 @@ import { MaquinasReducer } from '../../reducers/MaquinasReducer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { types } from '../../types/types'
 import { CompanyContext } from '../../reducers/CompanyContext'
+import Swal from 'sweetalert2'
 
 export const AddMaquina = ({ setShow, setmaquinaSelected, setFetchingMaquinaria }) => {
 	const [auxValue, setAuxValue] = useState()
@@ -92,11 +93,16 @@ export const AddMaquina = ({ setShow, setmaquinaSelected, setFetchingMaquinaria 
 	}
 
 	const saveChanges = async () => {
-		await createMaquina(maquinaToCreate)
-
-		await setFetchingMaquinaria(true)
-		await setmaquinaSelected(maquinaToCreate)
-		await setShow(false)
+		const newMaquina = await createMaquina(maquinaToCreate)
+		if (!newMaquina) {
+			Swal.fire('¡Oh-oh!', 'Ha habido un error, inténtalo de nuevo', 'error')
+			await setShow(false)
+		} else {
+			Swal.fire('¡Chachi!', 'Los cambios han sido guardados', 'success')
+			await setFetchingMaquinaria(true)
+			await setmaquinaSelected(maquinaToCreate)
+			await setShow(false)
+		}
 	}
 
 	return (

@@ -13,7 +13,6 @@ const maquinaModel = new Schema(
 		},
 		category: {
 			type: String,
-			enum: ['Maquinaria CNC', 'Maquinaria Convencional', 'Otra maquinaria'],
 			default: 'Maquinaria CNC',
 			required: true,
 		},
