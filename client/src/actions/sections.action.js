@@ -1,6 +1,7 @@
 import { fetchConToken, fetchSinToken } from '../helpers/fetch'
 
 export const addSection = async (section) => {
+	console.log(section)
 	const resp = await fetchConToken(`section/new`, section, 'POST')
 	const body = await resp.json()
 	return body.section

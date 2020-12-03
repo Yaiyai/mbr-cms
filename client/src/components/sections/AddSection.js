@@ -12,6 +12,7 @@ export const AddSection = ({ handleClose }) => {
 	const { dispatchSections } = useContext(SectionContext)
 	const [auxValue, setAuxValue] = useState()
 	const [quill, setQuill] = useState()
+	const [parsed, setParsed] = useState()
 
 	const { values, setValues, handleInputChange, handleFileChange } = useForm()
 	const { uniqueImage, gallery, features, formInputs } = values
@@ -21,18 +22,7 @@ export const AddSection = ({ handleClose }) => {
 		setValues({
 			...values,
 			text: quill,
-		})
-		handleParsedText(quill)
-	}
-
-	const createHTLM = (text) => {
-		return { __html: text }
-	}
-
-	const handleParsedText = (text) => {
-		setValues({
-			...values,
-			parsedText: createHTLM(text),
+			parsedText: parsed,
 		})
 	}
 
@@ -196,7 +186,8 @@ export const AddSection = ({ handleClose }) => {
 
 				<div className='right-side'>
 					<label>Texto </label>
-					<TextEditor setQuill={setQuill} handleQuill={handleQuill} />
+					<TextEditor setQuill={setQuill} handleQuill={handleQuill} setParsed={setParsed} />
+
 					<label htmlFor=''>Características</label>
 					<div className='features'>
 						{features?.map((ft, idx) => (

@@ -15,7 +15,7 @@ const sectionModel = new Schema(
 		title: String,
 		subtitle: String,
 		text: String,
-		parsedText: String,
+		parsedText: Object,
 		uniqueImage: String,
 		gallery: Array,
 		features: Array,

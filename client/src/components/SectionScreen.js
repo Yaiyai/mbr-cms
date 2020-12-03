@@ -21,11 +21,14 @@ export const SectionScreen = () => {
 	let thisSection = useRef()
 	const [auxValue, setAuxValue] = useState()
 	const [quill, setQuill] = useState()
+	const [parsed, setParsed] = useState()
+
 	const handleQuill = (e) => {
 		e.preventDefault()
 		setValues({
 			...values,
 			text: quill,
+			parsedText: parsed,
 		})
 	}
 
@@ -35,6 +38,7 @@ export const SectionScreen = () => {
 			setValues(thisSection.current)
 		}
 	}, [id, sections, setValues])
+
 	const clearInput = (input) => {
 		const theinput = document.getElementById(input)
 		theinput.value = ''
@@ -270,7 +274,7 @@ export const SectionScreen = () => {
 							<p>Texto:</p>
 							<div dangerouslySetInnerHTML={parsedText}></div>
 						</section>
-						<TextEditor setQuill={setQuill} handleQuill={handleQuill} />
+						<TextEditor setQuill={setQuill} handleQuill={handleQuill} setParsed={setParsed} />
 					</>
 				)}
 			</section>

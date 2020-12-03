@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-const TextEditor = ({ setQuill, handleQuill }) => {
+const TextEditor = ({ setQuill, handleQuill, setParsed }) => {
 	const [value, setValue] = useState('')
+
+	const createHTLM = (text) => {
+		return { __html: text }
+	}
 
 	useEffect(() => {
 		setQuill(value)
-	}, [value, setQuill])
+		setParsed(createHTLM(value))
+	}, [value, setQuill, setParsed])
 
 	return (
 		<div>
@@ -25,7 +30,7 @@ const TextEditor = ({ setQuill, handleQuill }) => {
 
 TextEditor.modules = {
 	toolbar: [
-		// [{ header: '1' }, { header: '2' }, { font: [] }],
+		[{ header: '1' }, { header: '2' }, { font: [] }],
 		[{ size: [] }],
 		['bold', 'italic', 'underline', 'strike', 'blockquote'],
 		[{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
