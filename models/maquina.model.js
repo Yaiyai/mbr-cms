@@ -22,6 +22,9 @@ const maquinaModel = new Schema(
 		gallery: {
 			type: Array,
 		},
+		order: {
+			type: Number,
+		},
 	},
 	{
 		timestamps: true,

@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal'
 import { EditMaquina } from './maquinas/EditMaquina'
 import { AddMaquina } from './maquinas/AddMaquina'
 import { deleteMaquina } from '../actions/maquina.action'
+import Swal from 'sweetalert2'
 
 export const MaquinasScreen = () => {
 	const [show, setShow] = useState(false)
@@ -28,7 +29,18 @@ export const MaquinasScreen = () => {
 		if (fetchingMaquinaria) {
 			fetchSinToken('maquinaria')
 				.then((data) => data.json())
-				.then((data) => dispatchMaquinasData({ type: types.getMaquinas, payload: data.data }))
+				.then((data) => {
+					const prueba = data.data.sort((a, b) => {
+						if (a.order > b.order) {
+							return 1
+						}
+						if (a.order < b.order) {
+							return -1
+						}
+						return 0
+					})
+					dispatchMaquinasData({ type: types.getMaquinas, payload: prueba })
+				})
 				.then(() => setFetchingMaquinaria(false))
 				.catch((err) => new Error(err))
 		}
@@ -38,7 +50,23 @@ export const MaquinasScreen = () => {
 		await deleteMaquina(id)
 		setFetchingMaquinaria(true)
 	}
-
+	const askIfDelete = (id) => {
+		Swal.fire({
+			title: '¿Seguro?',
+			text: 'Si borras esto, se irá al infierno de las máquinas',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '¡Bórrala, señora!',
+			cancelButtonText: '¡Uy, no!',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				handleDeleteMaquina(id)
+				Swal.fire('¡Máquina borrada!', 'Esta máquina se marchó para no volver', 'success')
+			}
+		})
+	}
 	const handleModal = async (visible, modalId) => {
 		setShow(visible)
 		setModalId(modalId)
@@ -85,8 +113,8 @@ export const MaquinasScreen = () => {
 			</section>
 
 			<section className='all-maquinas'>
-				{maquinasData?.map((maq) => (
-					<MaquinaCard key={maq._id} maquina={maq} getID={getID} handleDeleteMaquina={handleDeleteMaquina} />
+				{maquinasData?.map((maq, idx) => (
+					<MaquinaCard idx={idx} key={maq._id} maquina={maq} getID={getID} askIfDelete={askIfDelete} />
 				))}
 			</section>
 

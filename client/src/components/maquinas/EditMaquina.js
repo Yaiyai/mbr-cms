@@ -130,6 +130,19 @@ export const EditMaquina = ({ maquina, setShow, setFetchingMaquinaria, setmaquin
 					</form>
 
 					<form onSubmit={handleSubmit}>
+						<label>Orden en la web* {maquinaToUpdate?.order && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
+
+						{maquinaToUpdate?.order && <p className='preview'>{maquinaToUpdate?.order}</p>}
+
+						<div className='button-file-group'>
+							<input className='order' type='number' onChange={handleInputChange} name='order' />
+							<button type='submit' className='my-btn mini third'>
+								Añadir
+							</button>
+						</div>
+					</form>
+
+					<form onSubmit={handleSubmit}>
 						<label>Imagen principal* {maquinaToUpdate?.image && <FontAwesomeIcon className='check-ok' icon='check-circle' />}</label>
 
 						<figure className='main-image'>
