@@ -26,3 +26,7 @@ app.use('/api/section', require('./routes/section.routes'))
 
 //Escuchar peticiones
 app.listen(process.env.PORT, () => console.log(`Servidor establecido en puerto ${process.env.PORT}`))
+
+app.use((req, res) => {
+	res.sendFile(__dirname + '/public/index.html')
+})
